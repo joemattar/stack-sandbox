@@ -7,16 +7,28 @@ const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
+
 // Initialize mongodb database connection from database controller
 require("./controllers/database-mongodb");
 // Passport - pass the passport variable into the passport.js controller to be used in the middleware
 require("./controllers/passport")(passport);
 
+const db = require("./controllers/database-mysql");
+db.sequelize.sync().then(
+  function () {
+    console.log("DB connection sucessful.");
+  },
+  function (err) {
+    // catch error here
+    console.log(err);
+  }
+);
+
 require("dotenv").config(); // to use environment variable
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
-const apiRouter = require("./routes/api");
+const apiPostsRouter = require("./routes/api-posts");
 const usersRouter = require("./routes/users");
 
 const app = express();
@@ -66,7 +78,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routing
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
-app.use("/api", apiRouter);
+app.use("/api", apiPostsRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler

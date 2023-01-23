@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div WELCOME PAGE AT ROUTE GET "/"
+  div --\
+  if user === undefined
+    a(href="/auth/google") Sign In With Google
+  else
+    div
+      if user.image
+        img(src=user.image alt="user photo")
+      else
+        img(src="/images/user.svg" alt="user photo")
+      div #{user.firstName} #{user.lastName}
+    a(href="/auth/logout") Log Out
+    div --\
+    a(href="/dashboard") Dashboard

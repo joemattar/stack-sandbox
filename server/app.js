@@ -13,23 +13,26 @@ require("./controllers/database-mongodb");
 // Passport - pass the passport variable into the passport.js controller to be used in the middleware
 require("./controllers/passport")(passport);
 
-const db = require("./controllers/database-mysql");
-db.sequelize.sync().then(
-  function () {
-    console.log("DB connection sucessful.");
-  },
-  function (err) {
-    // catch error here
-    console.log(err);
-  }
-);
+// UNCOMMENT WHEN NEW DB INSTANCE INITIALIZED
+// const mysqldb = require("./controllers/database-mysql");
+// mysqldb.sequelize.sync().then(
+//   function () {
+//     console.log("DB connection sucessful.");
+//   },
+//   function (err) {
+//     // catch error here
+//     console.log(err);
+//   }
+// );
 
 require("dotenv").config(); // to use environment variable
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
-const apiPostsRouter = require("./routes/api-posts");
-const usersRouter = require("./routes/users");
+const dashboardRouter = require("./routes/dashboard");
+const superheroesViewRouter = require("./routes/superheroes-view");
+const superheroesApiRouter = require("./routes/superheroes-api");
+const postsApiRouter = require("./routes/posts-api");
 
 const app = express();
 
@@ -56,7 +59,7 @@ app.use(passport.session());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set("view engine", "pug");
 
 app.use(logger("dev"));
 
@@ -78,8 +81,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routing
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
-app.use("/api", apiPostsRouter);
-app.use("/users", usersRouter);
+app.use("/dashboard", dashboardRouter);
+app.use("/superhero", superheroesViewRouter);
+app.use("/api/superhero", superheroesApiRouter);
+app.use("/api/post", postsApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,8 +1,42 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 3rem;
+  font: 1rem "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
 }
 
 a {
-  color: #00B7FF;
+  color: #8600a8;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  /*optional*/
+  font-family: inherit;
+  font-size: inherit;
+  color: #8600a8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+img {
+  height: 10rem;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.errors {
+  color: red;
 }

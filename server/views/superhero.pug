@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div SUPERHEROES PAGE AT ROUTE GET "/superhero"
+  div --\
+  a(href="/") Home
+  a(href="/dashboard") Dashboard
+  div --\
+  a(href="/superhero/create") Create Super Hero
+  div --\
+  each superhero in superheroes
+    a(href=superhero.url) #{superhero.name}
+  else
+    div No superheroes yet. Add your first!

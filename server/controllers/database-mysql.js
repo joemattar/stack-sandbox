@@ -26,7 +26,7 @@ const sequelize = new Sequelize(
   {
     host: mysqldbparams.HOST,
     dialect: mysqldbparams.dialect,
-    operatorsAliases: false,
+    // operatorsAliases: false,
 
     pool: {
       max: mysqldbparams.pool.max,

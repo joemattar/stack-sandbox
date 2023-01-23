@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div SUPERHERO DETAIL PAGE AT ROUTE GET "/superhero/:id"
+  div --\
+  a(href="/") Home
+  a(href="/dashboard") Dashboard
+  a(href="/superhero") Superheroes List
+  div --\
+  div #{superhero.name}
+  a(href=`/superhero/${superhero.id}/edit`) Edit
+  a(href=`/superhero/${superhero.id}/delete`) Delete

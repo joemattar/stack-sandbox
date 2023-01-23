@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div SUPERHERO CREATE PAGE AT ROUTE GET "/superhero/create"
+  div --\
+  a(href="/") Home
+  a(href="/dashboard") Dashboard
+  div --\
+  form(method='POST' action='')
+    label(for='name') Superhero Name:
+    input(type='text' id="name" name='name' value=(undefined===superhero ? '' : superhero.name))
+    button(type='submit') Submit
+  a(href="/superhero") Cancel
+  if errors
+    ul.errors
+      for error in errors
+        li!= error.msg

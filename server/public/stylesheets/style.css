@@ -26,7 +26,7 @@ img {
   height: 10rem;
 }
 
-input {
+input, textarea {
   font-family: inherit;
   font-size: inherit;
 }
@@ -35,6 +35,10 @@ form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.description {
+  max-width: 30rem;
 }
 
 .errors {

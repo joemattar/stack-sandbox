@@ -6,24 +6,24 @@ const superheroApiController = require("../controllers/mongodb-superhero-control
 // API AUTHORIZATION TO BE REVIEWED !!!
 const isAuthorized = require("../controllers/authentication");
 
-// Return list of super heroes
+// Return list of superheroes
 // Route GET /api/superhero
-router.get("/", isAuthorized, superheroApiController.superheroes_get);
+router.get("/", superheroApiController.superheroes_get);
 
 // Create superhero
 // Route POST /api/superhero
-router.post("/", isAuthorized, superheroApiController.superhero_post);
+router.post("/", superheroApiController.superhero_post);
 
 // Find superhero by id
 // Route GET /api/superhero/:id
-router.get("/:id", isAuthorized, superheroApiController.superhero_get);
+router.get("/:id", superheroApiController.superhero_get);
 
 // Update superhero by id
 // Route PUT /api/superhero/:id
-router.put("/:id", isAuthorized, superheroApiController.superhero_put);
+router.put("/:id", superheroApiController.superhero_put);
 
 // Delete superhero by id
 // Route DELETE /api/superhero/:id
-router.delete("/:id", isAuthorized, superheroApiController.superhero_delete);
+router.delete("/:id", superheroApiController.superhero_delete);
 
 module.exports = router;

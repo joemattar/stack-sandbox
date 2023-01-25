@@ -27,9 +27,17 @@ module.exports.superhero_post = function (req, res, next) {
     return;
   }
 
+  if (!req.body.description) {
+    res.status(400).send({
+      message: "Superhero description can not be empty!",
+    });
+    return;
+  }
+
   // Create a Superhero object.
   const superhero = new Superhero({
     name: req.body.name,
+    description: req.body.description,
   });
 
   Superhero.findOne({ name: req.body.name }).exec((err, found_superhero) => {
@@ -78,15 +86,23 @@ module.exports.superhero_put = function (req, res, next) {
     return;
   }
 
-  Superhero.updateOne({ _id: req.params.id }, { name: req.body.name }).exec(
-    (err, result) => {
-      if (err) {
-        return next(err);
-      }
-      // Successful, so send
-      res.send(result);
+  if (!req.body.description) {
+    res.status(400).send({
+      message: "Superhero description can not be empty!",
+    });
+    return;
+  }
+
+  Superhero.updateOne(
+    { _id: req.params.id },
+    { name: req.body.name, description: req.body.description }
+  ).exec((err, result) => {
+    if (err) {
+      return next(err);
     }
-  );
+    // Successful, so send
+    res.send(result);
+  });
 };
 
 // Delete superhero by id

@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 // Display list of super heroes
 // Route GET /superhero
 module.exports.superheroes_display_get = function (req, res, next) {
-  Superhero.find({}, "name")
+  Superhero.find({}, "name description")
     .sort({ name: 1 })
     .exec(function (err, superheroes) {
       if (err) {
@@ -35,6 +35,9 @@ module.exports.superhero_create_get = function (req, res, next) {
 module.exports.superhero_create_post = [
   // Validate and sanitize fields.
   body("name", "Superhero name must be specified").trim().isLength({ min: 1 }),
+  body("description", "Superhero description must be specified")
+    .trim()
+    .isLength({ min: 1 }),
   // Process request after validation and sanitization.
   (req, res, next) => {
     // Extract the validation errors from a request.
@@ -43,6 +46,7 @@ module.exports.superhero_create_post = [
     // Create a Superhero object with trimmed data.
     const superhero = new Superhero({
       name: req.body.name,
+      description: req.body.description,
     });
 
     if (!errors.isEmpty()) {
@@ -118,6 +122,9 @@ module.exports.superhero_edit_get = function (req, res, next) {
 module.exports.superhero_edit_post = [
   // Validate and sanitize fields.
   body("name", "Superhero name must be specified").trim().isLength({ min: 1 }),
+  body("description", "Superhero description must be specified")
+    .trim()
+    .isLength({ min: 1 }),
   // Process request after validation and sanitization.
   (req, res, next) => {
     // Extract the validation errors from a request.
@@ -133,6 +140,7 @@ module.exports.superhero_edit_post = [
         const superhero = new Superhero({
           ...selected_superhero,
           name: req.body.name,
+          description: req.body.description,
         });
 
         if (!errors.isEmpty()) {
@@ -149,7 +157,7 @@ module.exports.superhero_edit_post = [
           // Data from form is valid.
           Superhero.updateOne(
             { _id: req.params.id },
-            { name: req.body.name }
+            { name: req.body.name, description: req.body.description }
           ).exec(function (err) {
             if (err) {
               return next(err);

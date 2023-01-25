@@ -2,7 +2,7 @@ extends layout
 
 block content
   div WELCOME PAGE AT ROUTE GET "/"
-  div --\
+  div --
   if user === undefined
     a(href="/auth/google") Sign In With Google
   else
@@ -13,5 +13,5 @@ block content
         img(src="/images/user.svg" alt="user photo")
       div #{user.firstName} #{user.lastName}
     a(href="/auth/logout") Log Out
-    div --\
+    div --
     a(href="/dashboard") Dashboard

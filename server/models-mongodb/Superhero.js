@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 // Define User model from Schema
 const SuperheroSchema = new Schema({
   name: { type: String, required: true },
+  description: { type: String, required: true },
   dateCreated: { type: Date, default: Date.now },
 });
 

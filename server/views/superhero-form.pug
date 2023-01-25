@@ -2,13 +2,15 @@ extends layout
 
 block content
   div SUPERHERO CREATE PAGE AT ROUTE GET "/superhero/create"
-  div --\
+  div --
   a(href="/") Home
   a(href="/dashboard") Dashboard
-  div --\
+  div --
   form(method='POST' action='')
     label(for='name') Superhero Name:
-    input(type='text' id="name" name='name' value=(undefined===superhero ? '' : superhero.name))
+    input(type='text' id="name" name='name' required='true' value=(undefined===superhero ? '' : superhero.name))
+    label(for='description') Superhero Description:
+    textarea(type='textarea' id="description" name='description' placeholder='Description' required='true') #{undefined===superhero ? '' : superhero.description}
     button(type='submit') Submit
   a(href="/superhero") Cancel
   if errors
